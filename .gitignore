@@ -1,0 +1,27 @@
+// filepath: /D:/Documentos/projects/medic-scanner/medscanner-api/.gitignore
+appsettings.json
+appsettings.Development.json
+/medscanner-web/.env
+
+/medscanner-api/out
+/medscanner-api/bin/
+/medscanner-api/obj/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+
+**/bin/
+**/obj/
+**/out/
+**/.vs/
+**/.vscode/
+**/*.log
