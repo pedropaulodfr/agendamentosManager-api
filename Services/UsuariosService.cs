@@ -28,7 +28,7 @@ namespace agendamentosmanager_api.Services
                     Perfil = x.Perfil,
                     Nome = x.Nome,
                     Cpfcnpj = x.Cpfcnpj,
-                    Senha = x.Senha,
+                    Senha = "",
                     Master = x.Master,
                     Status = x.Ativo == true ? "Ativo" : "Inativo",
                     Deletado = x.Deletado
