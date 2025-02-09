@@ -65,7 +65,7 @@ namespace agendamentosmanager_api.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                return BadRequest(new { mensagem = "Erro alo tentar logar" });
             }
         }
 

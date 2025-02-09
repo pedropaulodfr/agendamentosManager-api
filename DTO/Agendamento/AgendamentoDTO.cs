@@ -13,9 +13,9 @@ namespace agendamentosmanager_api.DTO.Agendamento
 
         public string? Telefone { get; set; } = null!;
 
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
 
-        public long UsuarioId { get; set; }
+        public long? UsuarioId { get; set; }
 
         public string Servico { get; set; } = null!;
 

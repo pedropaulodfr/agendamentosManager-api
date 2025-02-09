@@ -21,6 +21,7 @@ namespace agendamentosmanager_api.Controllers
         }
 
         [HttpGet]
+        [Route("getAll")]
         public async Task<ActionResult> GetAll()
         {
             try
@@ -29,7 +30,7 @@ namespace agendamentosmanager_api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex });
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -43,7 +44,7 @@ namespace agendamentosmanager_api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex });
+                return BadRequest(new { message = ex.Message });
             }
         }
 
@@ -58,7 +59,7 @@ namespace agendamentosmanager_api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex });
+                return BadRequest(new { message = ex.Message });
             }
         }
     }

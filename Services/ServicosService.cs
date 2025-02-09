@@ -27,7 +27,8 @@ namespace agendamentosmanager_api.Services
                     Identificacao = x.Identificacao,
                     Descricao = x.Descricao,
                     TempoEstimado = x.TempoEstimado,
-                    Ativo = x.Ativo
+                    Ativo = x.Ativo,
+                    Status = x.Ativo == true ? "Ativo" : "Inativo"
                 }).ToList();
 
                 return retorno;
@@ -69,11 +70,28 @@ namespace agendamentosmanager_api.Services
                 existeServico.Identificacao = model.Identificacao;
                 existeServico.Descricao = model.Descricao;
                 existeServico.TempoEstimado = model.TempoEstimado;
-                existeServico.Ativo = model.Ativo;
+                existeServico.Ativo = model.Status == "Ativo" ? true : false;
 
                 await _dbContext.SaveChangesAsync();
 
                 return model;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message ?? ex.InnerException.ToString());
+            }
+        }
+
+        public async Task Delete(long Id)
+        {
+            try
+            {
+                var existeServico = await _dbContext.Servicos.Where(x => x.Id == Id).FirstOrDefaultAsync();
+                if(existeServico == null)
+                    throw new ArgumentException("O serviço não existe!");
+
+                _dbContext.Remove(existeServico);
+                await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {

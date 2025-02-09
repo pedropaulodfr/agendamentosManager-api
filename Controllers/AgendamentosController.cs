@@ -20,6 +20,7 @@ namespace agendamentosmanager_api.Controllers
         }
 
         [HttpPost]
+        [Route("getAll")]
         public async Task<ActionResult> GetAll([FromBody] AgendamentoFiltrosDTO filtros)
         {
             try
@@ -28,7 +29,7 @@ namespace agendamentosmanager_api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex });
+                return BadRequest(new { message = ex.Message  });
             }
         }
 
@@ -42,7 +43,7 @@ namespace agendamentosmanager_api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex });
+                return BadRequest(new { message = ex.Message  });
             }
         }
         

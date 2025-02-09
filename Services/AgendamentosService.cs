@@ -59,6 +59,8 @@ namespace agendamentosmanager_api.Services
                 var existeAgendamento = await _dbContext.Agendamentos.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
                 if(existeAgendamento == null)
                     throw new ArgumentException("Erro ao atualizar, o agendamento não existe!");
+
+                await VerificarAgendamento(model.Data, model.Servico, model.UsuarioId.Value);
                 
                 existeAgendamento.Nome = model.Nome;
                 existeAgendamento.Telefone = model.Telefone;
@@ -68,6 +70,24 @@ namespace agendamentosmanager_api.Services
                 await _dbContext.SaveChangesAsync();
 
                 return model;
+            }
+            catch(Exception ex)
+            {
+                throw new ArgumentException(ex.Message ?? ex.InnerException.ToString());
+            }
+        }
+
+        public async Task VerificarAgendamento(DateTime? Data, string Servico, long UsuarioId)
+        {
+            try
+            {
+                var existeAgendamentoData = await _dbContext.Agendamentos.Where(x => x.Data == Data && x.Executado != false).FirstOrDefaultAsync();
+                var existeAgendamentoCliente = await _dbContext.Agendamentos.Where(x => x.Servico == Servico && x.UsuarioId == UsuarioId && x.Executado != false).FirstOrDefaultAsync();
+                if(existeAgendamentoData != null)
+                    throw new ArgumentException("Já existe outro agendamento para essa data e horário");
+                if(existeAgendamentoCliente != null)
+                    throw new ArgumentException("O serviço já está agendado para este cliente");
+
             }
             catch(Exception ex)
             {
