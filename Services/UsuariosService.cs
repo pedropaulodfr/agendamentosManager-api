@@ -45,7 +45,7 @@ namespace agendamentosmanager_api.Services
 
         public async Task<UsuarioDTO> Insert(UsuarioDTO model)
         {
-            var existeUsuario = await _dbContext.Usuarios.Where(x => x.Cpfcnpj == model.Cpfcnpj && x.Deletado != true).FirstOrDefaultAsync();
+            var existeUsuario = await _dbContext.Usuarios.Where(x => x.Cpfcnpj.Trim() == model.Cpfcnpj.Trim() && x.Deletado != true).FirstOrDefaultAsync();
             if(existeUsuario != null)
                 throw new ArgumentException("Já existe um usuário cadastrado com esse CFP/CNPJ");
 
@@ -53,8 +53,8 @@ namespace agendamentosmanager_api.Services
             {
                 Perfil = model.Perfil,
                 Nome = model.Nome,
-                Cpfcnpj = model.Cpfcnpj,
-                Senha = model.Senha,
+                Cpfcnpj = model.Cpfcnpj.Trim().Replace("/","").Replace("-","").Replace(".",""),
+                Senha = model.Senha.Trim(),
                 Master = model.Master,
                 Ativo = model.Status == "Ativo" ? true : false,
                 Deletado = false
