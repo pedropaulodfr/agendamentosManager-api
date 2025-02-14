@@ -21,7 +21,7 @@ string MyAllowSpecificOrigins = "_myAllowspecificOrigins";
 builder.Services.AddCors(options => {
     options.AddPolicy(MyAllowSpecificOrigins, builder => 
     {
-        builder.WithOrigins("https://agendamentosmanager-web.fly.dev", "http://localhost:3000");
+        builder.WithOrigins("https://agendamentomanager.fly.dev", "http://localhost:3000");
         builder.AllowAnyHeader();
         builder.AllowAnyMethod();
     });
