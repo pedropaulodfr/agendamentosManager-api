@@ -37,6 +37,10 @@ namespace agendamentosmanager_api.Services
 
         public async Task<HorariosDTO> Insert(HorariosDTO model)
         {
+            var existeHorario = await _dbContext.Horarios.Where(x => x.Hora == model.Hora).FirstOrDefaultAsync();
+            if(existeHorario != null)
+                throw new ArgumentException("Esse horário já existe!");
+                
             Horario horario = new Horario
             {
                 Hora = model.Hora
