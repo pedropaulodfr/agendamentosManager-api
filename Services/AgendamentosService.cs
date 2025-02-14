@@ -67,11 +67,30 @@ namespace agendamentosmanager_api.Services
                 existeAgendamento.Nome = model.Nome;
                 existeAgendamento.Telefone = model.Telefone;
                 existeAgendamento.Servico = model.Servico;
-                existeAgendamento.Executado = model.Executado;
 
                 await _dbContext.SaveChangesAsync();
 
                 return model;
+            }
+            catch(Exception ex)
+            {
+                throw new ArgumentException(ex.Message ?? ex.InnerException.ToString());
+            }
+        }
+
+        public async Task<bool> ConcluirAgendamento(AgendamentoDTO model)
+        {
+            try
+            {
+                var existeAgendamento = await _dbContext.Agendamentos.Where(x => x.Id == model.Id).FirstOrDefaultAsync();
+                if(existeAgendamento == null)
+                    throw new ArgumentException("O agendamento não existe!");
+
+                existeAgendamento.Executado = true;
+
+                await _dbContext.SaveChangesAsync();
+
+                return true;
             }
             catch(Exception ex)
             {

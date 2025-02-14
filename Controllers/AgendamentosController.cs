@@ -33,6 +33,20 @@ namespace agendamentosmanager_api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("concluirAgendamento")]
+        public async Task<ActionResult> ConcluirAgendamento([FromBody] AgendamentoDTO model)
+        {
+            try
+            {
+                return StatusCode(200, await _agendamentosService.ConcluirAgendamento(model));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message  });
+            }
+        }   
+
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult> Update([FromBody] AgendamentoDTO model)
