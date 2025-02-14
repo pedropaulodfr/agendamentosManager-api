@@ -7,5 +7,5 @@ public partial class Horario
 {
     public long Id { get; set; }
 
-    public TimeOnly? Hora { get; set; }
+    public string? Hora { get; set; }
 }

@@ -24,7 +24,7 @@ namespace agendamentosmanager_api.Services
                 List<HorariosDTO> retorno = horarios.Select(x => new HorariosDTO
                 {
                     Id = x.Id,
-                    Hora = x.Hora.HasValue ? DateTime.Today.Add(x.Hora.Value.ToTimeSpan()) : (DateTime?)null
+                    Hora = x.Hora
                 }).ToList();
 
                 return retorno;
@@ -39,7 +39,7 @@ namespace agendamentosmanager_api.Services
         {
             Horario horario = new Horario
             {
-                Hora = model.Hora.HasValue ? TimeOnly.FromDateTime(model.Hora.Value) : (TimeOnly?)null
+                Hora = model.Hora
             };
 
             await _dbContext.AddAsync(horario);

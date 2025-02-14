@@ -54,6 +54,7 @@ public partial class AgendamentobotContext : DbContext
             entity.HasKey(e => e.Id).HasName("Horarios_pkey");
 
             entity.Property(e => e.Id).UseIdentityAlwaysColumn();
+            entity.Property(e => e.Hora).HasMaxLength(5);
         });
 
         modelBuilder.Entity<Servico>(entity =>
