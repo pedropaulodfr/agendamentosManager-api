@@ -11,8 +11,10 @@ namespace agendamentosmanager_api.DTO.Agendamento
 
         public string? Telefone { get; set; } = null!;
 
-        public DateTime Data { get; set; }
+        public DateTime Data { get; set; } = DateTime.Now;
+        public string Hora { get; set; } = null!;
 
         public string Servico { get; set; } = null!;
+        public string Executado { get; set; } = "false"; 
     }
 }

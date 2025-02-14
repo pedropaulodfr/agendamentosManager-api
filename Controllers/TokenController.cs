@@ -28,6 +28,10 @@ namespace agendamentosmanager_api.Controllers
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
 
+                // Verifica se o usuário existe
+                if (user == null)
+                    throw new ArgumentException ("Usuário ou senha inválidos. Verifique os dados e tente novamente.");
+
                 UsuarioDTO _user = new UsuarioDTO()
                 {
                     Id = user.Id,
@@ -38,17 +42,12 @@ namespace agendamentosmanager_api.Controllers
                     Senha = user.Senha,
                 };
 
-                // Verifica se o usuário existe
-                if (user == null)
-                    return NotFound(new { message = "Usuário ou senha inválidos" });
-                
                 // Gera o Token
                 var token = TokenService.GenerateToken(_user);
 
                 // Oculta a senha
                 user.Senha = "";
                 user.Cpfcnpj = model.Cpfcnpj;
-
 
                 // Retorna os dados encapsulados em um ActionResult
                 UsuarioAutenticadoDTO usuarioAutenticado = new UsuarioAutenticadoDTO
@@ -65,7 +64,7 @@ namespace agendamentosmanager_api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { mensagem = "Erro alo tentar logar" });
+                return BadRequest(new { message = ex.Message });
             }
         }
 

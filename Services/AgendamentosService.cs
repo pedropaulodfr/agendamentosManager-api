@@ -28,7 +28,9 @@ namespace agendamentosmanager_api.Services
                     (string.IsNullOrEmpty(filtros.Telefone) || x.Telefone == filtros.Telefone ) &&
                     (string.IsNullOrEmpty(filtros.Nome) || x.Nome == filtros.Nome ) &&
                     (string.IsNullOrEmpty(filtros.Servico) || x.Servico == filtros.Servico ) &&
-                    (filtros.Data != null || x.Data.Date == filtros.Data.Date )
+                    (string.IsNullOrEmpty(filtros.Executado) || x.Executado == Boolean.Parse(filtros.Executado) ) &&
+                    (filtros.Data == null || x.Data.Date == filtros.Data.Date ) &&
+                    (filtros.Hora == null || ((x.Data.Hour == DateTime.Parse(filtros.Hora).Hour) && (x.Data.Minute == DateTime.Parse(filtros.Hora).Minute)))
                 )
                 .AsNoTracking()
                 .ToListAsync();
