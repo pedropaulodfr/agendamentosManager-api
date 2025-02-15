@@ -6,6 +6,7 @@ using agendamentosmanager_api.DTO.Agendamento;
 using agendamentosmanager_api.DTO.Servicos;
 using agendamentosmanager_api.Models;
 using agendamentosmanager_api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace agendamentosmanager_api.Controllers
@@ -19,6 +20,7 @@ namespace agendamentosmanager_api.Controllers
             _servicosService = servicosService;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("getAll")]
         public async Task<ActionResult> GetAll()
@@ -33,6 +35,7 @@ namespace agendamentosmanager_api.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("insert")]
         public async Task<ActionResult> Insert([FromBody] ServicosDTO model)
@@ -47,6 +50,7 @@ namespace agendamentosmanager_api.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult> Update([FromBody] ServicosDTO model)
@@ -61,6 +65,7 @@ namespace agendamentosmanager_api.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("delete/{id}")]
         public async Task<ActionResult> Delete(long id)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using agendamentosmanager_api.DTO.Agendamento;
 using agendamentosmanager_api.Models;
 using agendamentosmanager_api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace agendamentosmanager_api.Controllers
@@ -19,6 +20,7 @@ namespace agendamentosmanager_api.Controllers
             _agendamentosService = agendamentosService;
         }
 
+        [Authorize]
         [HttpPost]
         [Route("getAll")]
         public async Task<ActionResult> GetAll([FromBody] AgendamentoFiltrosDTO filtros)
@@ -33,6 +35,7 @@ namespace agendamentosmanager_api.Controllers
             }
         }
 
+        [Authorize]    
         [HttpPost]
         [Route("concluirAgendamento")]
         public async Task<ActionResult> ConcluirAgendamento([FromBody] AgendamentoDTO model)
@@ -47,6 +50,7 @@ namespace agendamentosmanager_api.Controllers
             }
         }   
 
+        [Authorize]    
         [HttpPut]
         [Route("update")]
         public async Task<ActionResult> Update([FromBody] AgendamentoDTO model)

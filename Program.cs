@@ -63,6 +63,7 @@ builder.Services.AddScoped<AgendamentosService>();
 builder.Services.AddScoped<ServicosService>();
 builder.Services.AddScoped<HorariosService>();
 builder.Services.AddScoped<UsuariosService>();
+builder.Services.AddScoped<RelatoriosService>();
 
 var app = builder.Build();
 
